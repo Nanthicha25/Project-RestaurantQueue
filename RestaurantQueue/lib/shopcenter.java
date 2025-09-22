@@ -1,0 +1,109 @@
+package lib;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Menu.*;
+
+//คลาสกลางสำหรับเราใช้งาน 
+public class shopcenter {
+    food foods;
+    typefoodcatalog typefood=new typefoodcatalog();
+    Drinks Drinks=new Drinks();
+    Dessert Dessert=new Dessert();
+    Maincourse Maincourse=new Maincourse();
+    calprice cal=new calprice();
+    List<shopcart>buy=new ArrayList<>(); //สำหรับตะกร้าอาหาร
+    List<food>allmenu=new ArrayList<>(); //สำหรับเก็บเมนูอาหารทั้งหมดที่สร้าง
+
+  public void Createmenu(String type,String Id, String Name, double price) throws InvalidOperationException
+  {
+    foods=new food(type, Id, Name, price);
+    allmenu.add(foods);
+    typefood.addgoods(foods);
+    
+  }
+  public void SetTypetoMenu(String type,menu namemenu)
+  {
+    typefood.addtypefood(type,namemenu);
+  }
+   
+  public void Deletemenu(String id)throws InvalidOperationException, goodsNotFoundException
+  { food deletemenu;
+    int i=0;
+    boolean check=false;
+    for(food f:allmenu)
+    {
+      if(f.getId().equals(id))
+      {
+          deletemenu=f;allmenu.remove(f);
+          typefood.deletegoods(deletemenu); check=true; break;} i++;}
+          if(check)
+          { allmenu.remove(i);}
+          else
+          {
+            throw new goodsNotFoundException("Don't have food Id : "+id);
+          }}
+  public void Clearmenu(String namemenu)throws InvalidOperationException, goodsNotFoundException
+  {
+    if(namemenu==null||namemenu.isEmpty()||namemenu.isBlank())
+    {throw new InvalidOperationException("Don't have "+namemenu +"in Menu");}
+    else{typefood.cleargoods(namemenu);}
+    
+  }
+  public void findById(String Id,String namemenu) throws goodsNotFoundException, InvalidOperationException
+  { typefood.findById(Id,namemenu);  }
+ 
+  public void Showallmenu(String namemenu) throws goodsNotFoundException, InvalidOperationException
+  {   typefood.getAllfoods(namemenu);  }
+
+
+  //เมธอดเพิ่มอาหารเข้าตะกร้า
+  public void Addmenu(String Id, int quantity,String comment) throws InvalidOperationException 
+  { food buyFood=null;
+    shopcart shopFood=null;
+    boolean checkallmenu=false;
+    boolean check=false;
+   // if(comment == null || comment.isBlank()) comment = "No comment";
+    int i=0;
+
+    for(food f:allmenu)
+    {
+      if(f.getId().equals(Id))
+      {  
+        buyFood=f;
+        checkallmenu=true;
+      }}
+    
+      //กรณีอาหารที่เพิ่มซ้ำกับในตะกร้าที่มีอยู่
+    for(shopcart f:buy)
+    {  //ถ้าอาหารอย่างเดียวกันแต่คอมเม้นต่างกันจะแยกกันในบิล
+      if(f.getFoods().getId().equals(Id)&&!(f.getcomment().equals(comment)))
+      {  
+        shopFood=f; check=false; checkallmenu=true;break;
+      } 
+      if(f.getFoods().getId().equals(Id)&&f.getcomment().equals(comment))//ถ้าอาหารอย่างเดียวกันคอมเม้นเดียวกันจะรวมกันในบิล
+      {  
+        shopFood=f; check=true; checkallmenu=false;break;
+      }i++;}
+
+      if(check)
+      {shopFood.increaseQuantity(quantity);
+       buy.set(i, new shopcart(buyFood, shopFood.getQuantity(), comment));
+      }
+    if(checkallmenu)
+    {shopcart shop=new shopcart(buyFood, quantity, comment);
+    buy.add(shop);}
+     if(checkallmenu==false && check==false)
+     {throw new InvalidOperationException("Not found food in menu");}
+  }
+
+    public double Calprice()
+    { double total=0;
+      for(shopcart shop:buy)
+      {
+       total+=cal.normalclient(shop);
+      }
+      return total;
+    }
+}
