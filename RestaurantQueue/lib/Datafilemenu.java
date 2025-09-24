@@ -5,9 +5,9 @@ import java.util.List;
 public class Datafilemenu {
     List<String> check = new ArrayList<>();
     String s;
-    File f1;
-    FileWriter f2;
-    BufferedWriter f3;
+    File W1;
+    FileWriter W2;
+    BufferedWriter W3;
 
     File R1;
     FileReader R2;
@@ -89,13 +89,13 @@ public class Datafilemenu {
             check.add(foods.getName()+","+foods.getId()+","+foods.getPrice()+","+foods.gettype());
            
         }
-        f1=new File(namemenu);
-          f2=new FileWriter(f1);
-          f3=new BufferedWriter(f2);
+        W1=new File(namemenu);
+          W2=new FileWriter(W1);
+          W3=new BufferedWriter(W2);
 
          for (String l : check) {
-                f3.write(l);
-                f3.newLine();
+                W3.write(l);
+                W3.newLine();
             }
     
     }catch(Exception e)
@@ -103,8 +103,8 @@ public class Datafilemenu {
        System.out.println(e.getMessage());
     }finally{
     try {   check.clear();
-        if (f3 != null) f3.close();
-        if (f2 != null) f2.close();
+        if (W3 != null) W3.close();
+        if (W2 != null) W2.close();
         if (R3 != null) R3.close();
         if (R2 != null) R2.close();
     } catch (Exception e) {
@@ -130,13 +130,13 @@ public class Datafilemenu {
         {
             check.remove(i); break;
         }}
-          f1=new File(namemenu);
-          f2=new FileWriter(f1);
-          f3=new BufferedWriter(f2);
+          W1=new File(namemenu);
+          W2=new FileWriter(W1);
+          W3=new BufferedWriter(W2);
            
     for (String l : check) {
-                f3.write(l);
-                f3.newLine();
+                W3.write(l);
+                W3.newLine();
             }
             
           
@@ -145,8 +145,8 @@ public class Datafilemenu {
      }finally
      {
         try {check.clear();
-        if (f3 != null) f3.close();
-        if (f2 != null) f2.close();
+        if (W3 != null) W3.close();
+        if (W2 != null) W2.close();
         if (R3 != null) R3.close();
         if (R2 != null) R2.close();
         } catch (Exception e) {
@@ -159,9 +159,9 @@ public class Datafilemenu {
      { 
           try {
             
-            f1=new File(namemenu);
-            f2=new FileWriter(f1);
-            f3=new BufferedWriter(f2);
+            W1=new File(namemenu);
+            W2=new FileWriter(W1);
+            W3=new BufferedWriter(W2);
 
             check.clear();
 
@@ -169,10 +169,10 @@ public class Datafilemenu {
             System.out.println(e);
         }finally{
             try {
-        if (f3 != null) f3.close();
-        if (f2 != null) f2.close();
-        if (R3 != null) R3.close();
-        if (R2 != null) R2.close();
+        if (W3 != null) W3.close();
+        if (W2 != null) W2.close();
+        if (W3 != null) R3.close();
+        if (W2 != null) R2.close();
             } catch (Exception e) {
                System.out.println(e);
             }

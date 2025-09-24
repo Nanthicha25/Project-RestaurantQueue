@@ -17,12 +17,15 @@ public class shopcenter {
     List<food>allmenu=new ArrayList<>(); //สำหรับเก็บเมนูอาหารทั้งหมดที่สร้าง
 
   public void Createmenu(String type,String Id, String Name, double price) throws InvalidOperationException
-  {
+  { if(Id==null||Id.isBlank()||Id.isEmpty())
+    {throw new InvalidOperationException("Invalid Id");}
+    if(price<0)
+    {throw new InvalidOperationException("Price must more than 0 Baht");}
     if(type.equals("Dessert")||type.equals("Drinks")||type.equals("Maincourse"))
      {foods=new food(type, Id, Name, price);
     allmenu.add(foods);
     typefood.addgoods(foods);}
-    else {throw new InvalidOperationException("Don't have this type in menu");}
+    else {throw new InvalidOperationException("Don't have this type :\""+type+"\" in menu");}
 
     
     
@@ -71,9 +74,35 @@ public class shopcenter {
   public void Showallmenu(String namemenu) throws goodsNotFoundException, InvalidOperationException
   {   typefood.getAllfoods(namemenu);  }
 
+  //สำหรับจัดการstock
+  //กำหนดประเภทอาหารกับชื่อstock
+  public void SetTypetoStock(String type,menu namestock)
+  {
+    typefood.addtypefood(type,namestock);
+  }
+
+  public void Addstock(String type,String Id, String Name, double price)throws InvalidOperationException
+  {food foods;
+    
+    
+
+    if(type.equals("Dessert")||type.equals("Drinks")||type.equals("Maincourse"))
+    {for(food f:allmenu)
+    {
+      if(f.getName().equals(Name)&&f.getId().equals(Id))
+      { foods=f; 
+        typefood.addstock(foods); break;
+      }
+    }}else {throw new InvalidOperationException("Don't have this type : \""+type+"\" in menu");}
+
+    
+   
+  }
+   
+
 
   //เมธอดเพิ่มอาหารเข้าตะกร้า
-  public void Addmenu(String Id, int quantity,String comment) throws InvalidOperationException 
+ /*  public void Addmenu(String Id, int quantity,String comment) throws InvalidOperationException 
   { if(quantity<=0)
     {
       throw new InvalidOperationException("Quantity must greater than 0");
@@ -123,5 +152,5 @@ public class shopcenter {
        total+=cal.normalclient(shop);
       }
       return total;
-    }
+    }*/
 }
