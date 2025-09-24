@@ -25,15 +25,15 @@ Datafilemenu updatemenu=new Datafilemenu();
     public void addfood(food foods) throws InvalidOperationException {
        boolean check = true;
         for(int i=0;i<maincourse.size();i++)
-        {    
+        {    //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
+            if(maincourse.get(i).getId().equals(foods.getId()))
+            { maincourse.set(i, foods);
+            check=false;}
             if(maincourse.get(i).getName().equals(foods.getName()))
             {
                 throw new InvalidOperationException("Duplicate name in Maincourse ");
             }
-            //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
-            if(maincourse.get(i).getId().equals(foods.getId()))
-            { maincourse.set(i, foods);
-            check=false;} }
+             }
         if(check)    
        {maincourse.add(foods);}
         checkRep();
@@ -62,7 +62,7 @@ Datafilemenu updatemenu=new Datafilemenu();
         }
         maincourse.clear();
         checkRep();
-        updatemenu.clear("maincourse");
+        updatemenu.clear("Maincourse");
     }
      public food findById(String Id)throws goodsNotFoundException
      {  boolean test=true;

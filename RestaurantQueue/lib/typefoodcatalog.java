@@ -35,14 +35,16 @@ List<food> Allmenu = new ArrayList<>();
         }
     //หาอาหารในเมนูโดยรหัส
     public void findById(String Id,String namemenu) throws goodsNotFoundException, InvalidOperationException {
-         if (Id == null || Id.isBlank()||Id.isEmpty()) 
-       {throw new goodsNotFoundException("Don't have  food in " + namemenu );}
-
         menu typemenu=data.get(namemenu);
         if(typemenu==null)
         {
-            throw new InvalidOperationException("Don't have type menu : "+namemenu+" in my menu");
+            throw new InvalidOperationException("Don't have type menu : "+namemenu+" in my Menu");
         }
+
+        if (Id == null || Id.isBlank()||Id.isEmpty()) 
+       {throw new goodsNotFoundException("Don't have  food Id :" + Id +" in "+namemenu );}
+
+        
        
         food f=typemenu.findById(Id);
         System.out.println(f.getName()+" "+f.getId()+" "+f.getPrice()+" "+f.gettype());

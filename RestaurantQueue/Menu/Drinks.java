@@ -28,17 +28,19 @@ Datafilemenu updatemenu=new Datafilemenu();
     public void addfood(food foods) throws InvalidOperationException {
        boolean check = true;
         for(int i=0;i<drinks.size();i++)
-        {   if(drinks.get(i).getName().equals(foods.getName()))
-            {check=false;
-             throw new InvalidOperationException("Duplicate name in Drinks");
-                
-            }
-            //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
+        {   //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
             if(drinks.get(i).getId().equals(foods.getId()))
             { drinks.set(i, foods);
-            check=false;} }
-        if(check)    
-       {drinks.add(foods);}
+            check=false;} 
+       
+            if(drinks.get(i).getName().equals(foods.getName()))
+            {check=false;
+             throw new InvalidOperationException(foods.getName()+" Duplicate name in Drinks");
+            }}    
+            
+            
+           if(check)    
+       {drinks.add(foods);  }
         checkRep();
         updatemenu.write("Drinks",foods);
     }

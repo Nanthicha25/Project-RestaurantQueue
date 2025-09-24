@@ -19,7 +19,7 @@ public class shopcart {
         }
     }
 
-    public shopcart(food foods, int quantity,String comment) {
+    public shopcart(food foods, int quantity,String comment){
         this.foods = foods;
         this.quantity = quantity;
         this.comment=comment;

@@ -36,13 +36,13 @@ public class shopcenter {
     {
       if(f.getId().equals(id))
       {
-          deletemenu=f;allmenu.remove(f);
+          deletemenu=f; allmenu.remove(f);
           typefood.deletegoods(deletemenu); check=true; break;} i++;}
           if(check)
           { allmenu.remove(i);}
           else
           {
-            throw new goodsNotFoundException("Don't have food Id : "+id);
+            throw new goodsNotFoundException("Don't have food Id : "+id +" in Menu");
           }}
   public void Clearmenu(String namemenu)throws InvalidOperationException, goodsNotFoundException
   {
@@ -51,8 +51,18 @@ public class shopcenter {
     else{typefood.cleargoods(namemenu);}
     
   }
-  public void findById(String Id,String namemenu) throws goodsNotFoundException, InvalidOperationException
-  { typefood.findById(Id,namemenu);  }
+  public void findById(String Id) throws goodsNotFoundException, InvalidOperationException
+  { boolean check=true;
+    for(food f:allmenu){
+    if(f.getId().equals(Id))
+    { check=false;
+      String namemenu=f.gettype();
+      typefood.findById(Id,namemenu);
+    }}
+    if(check)
+    {throw new InvalidOperationException("Don't have food Id :" + Id +" in Menu");}
+  
+      }
  
   public void Showallmenu(String namemenu) throws goodsNotFoundException, InvalidOperationException
   {   typefood.getAllfoods(namemenu);  }
@@ -60,13 +70,17 @@ public class shopcenter {
 
   //เมธอดเพิ่มอาหารเข้าตะกร้า
   public void Addmenu(String Id, int quantity,String comment) throws InvalidOperationException 
-  { food buyFood=null;
+  { if(quantity<=0)
+    {
+      throw new InvalidOperationException("Quantity must greater than 0");
+    }
+    food buyFood=null;
     shopcart shopFood=null;
     boolean checkallmenu=false;
     boolean check=false;
    // if(comment == null || comment.isBlank()) comment = "No comment";
     int i=0;
-
+    
     for(food f:allmenu)
     {
       if(f.getId().equals(Id))

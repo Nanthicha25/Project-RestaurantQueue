@@ -8,7 +8,7 @@ import lib.*;
 public class Dessert implements menu {
     private ArrayList<food> dessert=new ArrayList<>();
    Datafilemenu updatemenu=new Datafilemenu();
-
+   
     private void checkRep() {
         if (dessert == null) {
             throw new RuntimeException("RI violated: desserts list cannot be null.");
@@ -18,34 +18,24 @@ public class Dessert implements menu {
             for (int j = i + 1; j < dessert.size(); j++) {
                 if (dessert.get(i).equals(dessert.get(j))) {
                     throw new RuntimeException("RI violated: catalog contains duplicate desserts.");
-                }
-                
-            }
-        }
-    }
-
-    public Dessert() {
-        checkRep();
-    }
-    
+                }}}}
+    public Dessert() 
+    {    checkRep();}
 
     @Override
     public void addfood(food foods) throws InvalidOperationException {
         boolean check = true;
+        
         for(int i=0;i<dessert.size();i++)
-        {    if(dessert.get(i).getName().equals(foods.getName()))
-            {check=false;
-             throw new InvalidOperationException("Duplicate name in Drinks");
-                
-            }
-            if(dessert.get(i).getName().equals(foods.getName()))
-            {
-                throw new InvalidOperationException("Duplicate name Dessert");
-            }
-            //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
+        {    //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
             if(dessert.get(i).getId().equals(foods.getId()))
             { dessert.set(i, foods);
-            check=false;} }
+            check=false;}
+            if(dessert.get(i).getName().equals(foods.getName()))
+            {   check=false;
+                throw new InvalidOperationException(foods.getName()+" Duplicate name Dessert");
+            }
+             }
         if(check)    
        {dessert.add(foods);}
         checkRep();
@@ -55,28 +45,27 @@ public class Dessert implements menu {
     @Override
     public void deletefood(food foods) throws goodsNotFoundException {
        boolean check = true;
-        for(int i=0;i<dessert.size();i++)
-        {   //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
-            if(dessert.get(i).getId().equals(foods.getId()))
-            { dessert.set(i, foods);
-            check=false;} }
-        if(check)    
-       {dessert.add(foods);}
-        checkRep();
-        updatemenu.write("Dessert",foods);
+        for(food f:dessert)
+        {if(f.equals(foods))
+        {dessert.remove(foods);
+         updatemenu.delete("Dessert",foods);
+         check=false;
+         break;
+        }}
         if(check)
         {throw new goodsNotFoundException("Not food found in Dessert");}
     }
 
     @Override
     public void clearfood() throws goodsNotFoundException {
+        boolean check=true;
         if(dessert==null||dessert.isEmpty())
-        {
+        {   check=false;
             throw new goodsNotFoundException("Dessert don't have food");
         }
-        dessert.clear();
-        checkRep();
-       updatemenu.clear("dessert");
+        if(check)
+       { dessert.clear();
+       updatemenu.clear("Dessert");}checkRep();
     }
      public food findById(String Id)throws goodsNotFoundException
      { boolean check=true;
@@ -89,9 +78,9 @@ public class Dessert implements menu {
         }
         if(true)
         {throw new goodsNotFoundException("Your  Id :"+Id+" not found in Dessert");}
-        return null;
+        return null;}
 
-     }
+     
      @Override
      public List<food> getAllfoods() {
         return new ArrayList<>(dessert);
