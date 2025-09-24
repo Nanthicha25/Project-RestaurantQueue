@@ -33,7 +33,7 @@ Datafilemenu updatemenu=new Datafilemenu();
             { drinks.set(i, foods);
             check=false;} 
        
-            if(drinks.get(i).getName().equals(foods.getName()))
+            if(drinks.get(i).getName().toLowerCase().equals(foods.getName().toLowerCase()))
             {check=false;
              throw new InvalidOperationException(foods.getName()+" Duplicate name in Drinks");
             }}    

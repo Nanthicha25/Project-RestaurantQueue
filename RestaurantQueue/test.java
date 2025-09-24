@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Menu.*;
+import Stock.DessertStock;
+import Stock.DrinksStock;
+import Stock.MaincourseStock;
 import lib.*;
 public class test {
     public static void main(String[] args) {
@@ -142,10 +145,47 @@ try {
   } catch (Exception e) {
     System.out.println(e.getMessage());
   }
+  
 
+DrinksStock DrinksStock=new DrinksStock();
+MaincourseStock MaincourseStock=new MaincourseStock();
+DessertStock DessertStock=new DessertStock();
 
+shop.SetTypetoStock("Drinks", DrinksStock);
+shop.SetTypetoStock("Maincourse", MaincourseStock);
+shop.SetTypetoStock("Dessert", DessertStock);
+  try {
+    shop.Addstock("Maincourse","P020","Spagetti",40);
+  } catch (Exception e) {
+    System.out.println(e.getMessage());
+  }
 
-
+try {
+   shop.Addstock("Maincourse","0","",20);
+  } catch (Exception e) {
+    System.out.println(e.getMessage());
+  }
+try {
+    shop.Addstock("Dessert","P020","Spagetti",40);
+  } catch (Exception e) {
+    System.out.println(e.getMessage());
+  }
+try {
+    shop.Addstock("Dessert","P010","Cake",40);
+  } catch (Exception e) {
+    System.out.println(e.getMessage());
+  }
+  try {
+    shop.Addstock("Dessert","P000","Cake",30);
+  } catch (Exception e) {
+    System.out.println(e.getMessage());
+  }
+try {
+  shop.Createmenu("Dessert","P002","CAKE",40);
+  
+} catch (Exception e) {
+  System.out.println(e.getMessage());
+}
   //เพิ่มอาหารในตะกร้าและเพิ่มอาหารซ้ำ จำนวนอาหารต้องมากกว่า0 ถ้าน้อยกว่าจะแสดงผล 
   /*try {
     shop.Addmenu( "P004", 3,"Mineral water");
@@ -166,3 +206,4 @@ try {
     
     }
 }
+

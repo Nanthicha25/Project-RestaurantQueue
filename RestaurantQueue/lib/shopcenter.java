@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Menu.*;
+import Stock.stock;
 
 //คลาสกลางสำหรับเราใช้งาน 
 public class shopcenter {
@@ -76,15 +77,19 @@ public class shopcenter {
 
   //สำหรับจัดการstock
   //กำหนดประเภทอาหารกับชื่อstock
-  public void SetTypetoStock(String type,menu namestock)
+  public void SetTypetoStock(String type,stock namestock)
   {
-    typefood.addtypefood(type,namestock);
+    typefood.addtypestock(type,namestock);
   }
 
   public void Addstock(String type,String Id, String Name, double price)throws InvalidOperationException
   {food foods;
-    
-    
+     if(Id==null||Id.isBlank()||Id.isEmpty())
+    {throw new InvalidOperationException("Invalid Id");}
+    if(price<0)
+    {throw new InvalidOperationException("Price must more than 0 Baht");}
+    if(Name==null||Name.isBlank()||Name.isEmpty())
+    {throw new InvalidOperationException("Invalid Name");}
 
     if(type.equals("Dessert")||type.equals("Drinks")||type.equals("Maincourse"))
     {for(food f:allmenu)
@@ -93,11 +98,11 @@ public class shopcenter {
       { foods=f; 
         typefood.addstock(foods); break;
       }
-    }}else {throw new InvalidOperationException("Don't have this type : \""+type+"\" in menu");}
+    }}else {throw new InvalidOperationException("Don't have this type : \""+type+"\" in menu");}}
 
     
    
-  }
+  
    
 
 

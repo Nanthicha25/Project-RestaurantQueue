@@ -29,7 +29,7 @@ Datafilemenu updatemenu=new Datafilemenu();
             if(maincourse.get(i).getId().equals(foods.getId()))
             { maincourse.set(i, foods);
             check=false;}
-            if(maincourse.get(i).getName().equals(foods.getName()))
+            if(maincourse.get(i).getName().toLowerCase().equals(foods.getName().toLowerCase()))
             {
                 throw new InvalidOperationException("Duplicate name in Maincourse ");
             }

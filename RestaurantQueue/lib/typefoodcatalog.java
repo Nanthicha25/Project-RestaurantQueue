@@ -5,10 +5,11 @@ import java.util.Hashtable;
 import java.util.List;
 
 import Menu.*;
+import Stock.stock;
 
 public class typefoodcatalog {
 private final Hashtable<String, menu> data = new Hashtable<>();
-private final Hashtable<String, menu> datastock = new Hashtable<>();
+private final Hashtable<String, stock> datastock = new Hashtable<>();
 List<food> Allmenu = new ArrayList<>();
 List<food> Allstock = new ArrayList<>();
 
@@ -68,13 +69,17 @@ List<food> Allstock = new ArrayList<>();
          }}
         
     //สำหรับอาหารในstock
-     public void addtypestock(String type, menu typestock) {
+     public void addtypestock(String type, stock typestock) {
         // การใช้ .put() ใน Hashtable จะแทนที่ของเก่าโดยอัตโนมัติถ้ามี Key ซ้ำ
         //เก็บข้อมูลชนิดstock คู่กับประเภทอาหารในเมนูอาหาร
-        data.put(type, typestock);
+        datastock.put(type, typestock);
     }
-    public void addstock(food foods)
-    { 
-      String typestock=foods.getId();
+    public void addstock(food foods) throws InvalidOperationException
+    {
+      stock typeStock=datastock.get(foods.gettype());
+      if(typeStock==null)
+      {
+        throw new InvalidOperationException("Don't have type menu : "+foods.gettype()+" in my menu");
+      }else {typeStock.addfoodstock(foods);}
     }
 }
