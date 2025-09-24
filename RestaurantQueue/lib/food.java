@@ -22,9 +22,8 @@ public final class food {
 
 
     public food(String type,String Id, String Name, double price) throws InvalidOperationException{
-        if(type.equals("Dessert")||type.equals("Drinks")||type.equals("Maincourse"))
-        {this.type=type;}
-        else {throw new InvalidOperationException("Don't have this type in menu");}
+       
+        this.type=type;
         this.Id = Id;
         this.Name = Name;
         this.price = price;

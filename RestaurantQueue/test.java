@@ -134,7 +134,14 @@ try {
 } catch (Exception e) {
   System.out.println(e.getMessage());
 }
+//สร้างรายการอาหารที่ไม่ตรงกับหมวดหมู่ที่กำหนด
+  try {
 
+    shop.Createmenu("","P002" , "Coffee", 40);
+   
+  } catch (Exception e) {
+    System.out.println(e.getMessage());
+  }
 
 
 

@@ -18,9 +18,13 @@ public class shopcenter {
 
   public void Createmenu(String type,String Id, String Name, double price) throws InvalidOperationException
   {
-    foods=new food(type, Id, Name, price);
+    if(type.equals("Dessert")||type.equals("Drinks")||type.equals("Maincourse"))
+     {foods=new food(type, Id, Name, price);
     allmenu.add(foods);
-    typefood.addgoods(foods);
+    typefood.addgoods(foods);}
+    else {throw new InvalidOperationException("Don't have this type in menu");}
+
+    
     
   }
   public void SetTypetoMenu(String type,menu namemenu)
