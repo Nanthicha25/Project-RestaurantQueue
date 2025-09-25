@@ -15,7 +15,7 @@ Datafilemenu updatemenu=new Datafilemenu();
         // Check for duplicate products
         for (int i = 0; i < drinks.size(); i++) {
             for (int j = i + 1; j < drinks.size(); j++) {
-                if (drinks.get(i).equals(drinks.get(j))) {
+                if (drinks.get(i).getId().equals(drinks.get(j).getId())) {
                     throw new RuntimeException("RI violated: catalog contains duplicate drinks.");
                 }
             }
@@ -31,7 +31,7 @@ Datafilemenu updatemenu=new Datafilemenu();
         {   //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
             if(drinks.get(i).getId().equals(foods.getId()))
             { drinks.set(i, foods);
-            check=false;} 
+            check=false; break;} 
        
             if(drinks.get(i).getName().toLowerCase().equals(foods.getName().toLowerCase()))
             {check=false;

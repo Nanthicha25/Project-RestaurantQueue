@@ -28,7 +28,7 @@ Datafilemenu updatemenu=new Datafilemenu();
         {    //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
             if(maincourse.get(i).getId().equals(foods.getId()))
             { maincourse.set(i, foods);
-            check=false;}
+            check=false; break;}
             if(maincourse.get(i).getName().toLowerCase().equals(foods.getName().toLowerCase()))
             {
                 throw new InvalidOperationException("Duplicate name in Maincourse ");

@@ -28,7 +28,7 @@ shop.SetTypetoMenu("Dessert", Dessert);
     System.out.println(e);
   }
   //แสดงรายการอาหารทั้งหมดในหมวดหมู่อาหารที่ส่งชื่อไป ถ้าไม่พบจะแสดงผลว่าไม่มีอาหารในหมวดหมู่นี้และถ้าชื่ออาหารไม่ตรงหมวดหมู่ที่มีอยู่จะแสดงผลว่าไม่มีชื่อหมวดหมู่อาหารนี้ในเมนู
-  try {
+  /*try {
     shop.Showallmenu("Drinks");
 } catch (Exception e) {
     System.out.println(e.getMessage());
@@ -57,15 +57,27 @@ try {
   shop.findById("P001");
 } catch (Exception e) {
   System.out.println(e.getMessage());
-}
+}*/
 
- //เพิ่มรายการอาหารซ้ำ
-try {
-shop.Createmenu("Drinks","P002" , "Chanom", 40);
+ 
+ try {
+shop.findById("P004");
 } catch (Exception e) {
    System.out.println(e.getMessage());
 }
+//เพิ่มรายการอาหารซ้ำ
 try {
+shop.Createmenu("Drinks","P004" , "Cha", 40);
+} catch (Exception e) {
+   System.out.println(e.getMessage());
+}
+
+try {
+shop.Createmenu("Dessert","P012" , "Sweet", 40);
+} catch (Exception e) {
+   System.out.println(e.getMessage());
+}
+/* try {
   shop.Showallmenu("Drinks");
 } catch (Exception e) {
   System.out.println(e.getMessage());
@@ -185,7 +197,7 @@ try {
   
 } catch (Exception e) {
   System.out.println(e.getMessage());
-}
+}*/
   //เพิ่มอาหารในตะกร้าและเพิ่มอาหารซ้ำ จำนวนอาหารต้องมากกว่า0 ถ้าน้อยกว่าจะแสดงผล 
   /*try {
     shop.Addmenu( "P004", 3,"Mineral water");

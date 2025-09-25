@@ -30,7 +30,7 @@ public class Dessert implements menu {
         {    //ถ้ารหัสอาหารซ้ำจะอัพเดทอาหารใหม่
             if(dessert.get(i).getId().equals(foods.getId()))
             { dessert.set(i, foods);
-            check=false;}
+            check=false;  break;}
             if(dessert.get(i).getName().toLowerCase().equals(foods.getName().toLowerCase()))
             {   check=false;
                 throw new InvalidOperationException(foods.getName()+" Duplicate name Dessert");

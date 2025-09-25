@@ -24,11 +24,10 @@ public class shopcenter {
     {throw new InvalidOperationException("Price must more than 0 Baht");}
     if(type.equals("Dessert")||type.equals("Drinks")||type.equals("Maincourse"))
      {foods=new food(type, Id, Name, price);
+     typefood.addgoods(foods); 
     allmenu.add(foods);
-    typefood.addgoods(foods);}
+    }
     else {throw new InvalidOperationException("Don't have this type :\""+type+"\" in menu");}
-
-    
     
   }
   public void SetTypetoMenu(String type,menu namemenu)
