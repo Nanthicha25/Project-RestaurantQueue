@@ -470,7 +470,7 @@ public class MainDisplay extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnMenuActionPerformed
     
-    private void loadMenu(javax.swing.JPanel targetPanel, String filename) {
+    private void loadMenu(JPanel targetPanel, String filename) {
     List<food> menuItems = ReadFile.readMenuItems(filename); 
     targetPanel.removeAll();
     for (food item : menuItems) {
