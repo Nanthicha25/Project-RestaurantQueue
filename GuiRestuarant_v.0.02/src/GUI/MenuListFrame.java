@@ -995,17 +995,13 @@ public class MenuListFrame extends javax.swing.JFrame {
                     food foodItem = shop.getAllmenu().get(shop.getAllmenu().size() - 1);
 
                     MenuItemPanel itemGUI = new MenuItemPanel(foodItem, this);
-                    switch (type.toLowerCase()) {
-                        case "maincourse":
+                    if (type.toLowerCase().equals("maincourse")) {
                             MainPanel.add(itemGUI);
-                            break;
-                        case "drinks":
+                    } else if (type.toLowerCase().equals("drinks")) {
                             DrinkPanel.add(itemGUI);
-                            break;
-                        case "dessert":
+                    } else if (type.toLowerCase().equals("dessert")) {
                             DessertPanel.add(itemGUI);
-                            break;
-                    }        
+                    }       
                 }
             }
             this.revalidate();
