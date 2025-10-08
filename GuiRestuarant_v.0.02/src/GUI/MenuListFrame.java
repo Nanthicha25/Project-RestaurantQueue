@@ -14,7 +14,7 @@ import javax.swing.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+import java.util.ArrayList;
 
 /**
  *
@@ -35,7 +35,6 @@ public class MenuListFrame extends javax.swing.JFrame {
         loadMenu("src\\menu\\RestaurantQueue\\Drinks.txt");
         loadMenu("src\\menu\\RestaurantQueue\\Dessert.txt");
         loadMenu("src\\menu\\RestaurantQueue\\Maincourse.txt");
- 
         this.setLocationRelativeTo(null); 
     }
     public void onMenuSelected(MenuItemPanel selectedPanel, boolean isSelected) {
@@ -46,10 +45,8 @@ public class MenuListFrame extends javax.swing.JFrame {
         selectedItemPanel = selectedPanel;
     } else if (selectedItemPanel == selectedPanel) {
         selectedItemPanel = null;
+        }
     }
-}
-
-
     private void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -933,12 +930,7 @@ public class MenuListFrame extends javax.swing.JFrame {
             return;
         }
 
-        String dataLine = String.format("%s,%s,%s,%.2f,%s",
-                                        type,
-                                        selected.getId(),
-                                        selected.getName(),
-                                        selected.getPrice(),
-                                        selected.getImagePath()); 
+        String dataLine = String.format("%s,%s,%s,%.2f,%s",type,selected.getId(),selected.getName(),selected.getPrice(),selected.getImagePath()); 
 
         try (FileWriter fw = new FileWriter(stockFile, true);
              BufferedWriter bw = new BufferedWriter(fw);
@@ -970,10 +962,6 @@ public class MenuListFrame extends javax.swing.JFrame {
         }
         food itemToDelete = selectedItemPanel.getMenuItem();
         String menuName = itemToDelete.getName();
-        int confirm = JOptionPane.showConfirmDialog(this, 
-        "Are you Sure to delete: " + menuName + "?", 
-        "Summit", JOptionPane.YES_NO_OPTION);
-        if (confirm == JOptionPane.YES_OPTION) {
         try {
             deleteMenu(itemToDelete);
             shop.getAllmenu().remove(itemToDelete); 
@@ -989,7 +977,6 @@ public class MenuListFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error to delete : " + e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
             logger.log(java.util.logging.Level.SEVERE, "Error deleting menu item", e);
             }
-        }
     }//GEN-LAST:event_DeleteMenuActionPerformed
 
     private void loadMenu(String fileName) {
@@ -1070,8 +1057,8 @@ public class MenuListFrame extends javax.swing.JFrame {
         } else {
         return; 
         }
-        File file = new java.io.File(fileName);
-        List<String> lines = new java.util.ArrayList<>();
+        File file = new File(fileName);
+        List<String> lines = new ArrayList<>();
         String dataToDelete = String.format("%s,%s", itemToDelete.getId(), itemToDelete.getName());
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
