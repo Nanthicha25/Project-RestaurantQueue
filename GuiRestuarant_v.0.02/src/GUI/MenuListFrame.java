@@ -964,6 +964,7 @@ public class MenuListFrame extends javax.swing.JFrame {
         String menuName = itemToDelete.getName();
         try {
             deleteMenu(itemToDelete);
+            deleteStock(itemDelete);
             shop.getAllmenu().remove(itemToDelete); 
             selectedItemPanel = null;
             refreshDisplay(); 
@@ -1050,6 +1051,44 @@ public class MenuListFrame extends javax.swing.JFrame {
         fileName = "src\\menu\\RestaurantQueue\\Dessert.txt";
         } else if (type.equalsIgnoreCase("Maincourse")) {
         fileName = "src\\menu\\RestaurantQueue\\Maincourse.txt";
+        } else {
+        return; 
+        }
+        File file = new File(fileName);
+        List<String> lines = new ArrayList<>();
+        String dataToDelete = String.format("%s,%s", itemToDelete.getId(), itemToDelete.getName());
+
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] parts = line.split(",", 3); 
+            
+            if (parts.length >= 3) {
+                 String Type = parts[0];
+                 String Id = parts[1];
+                 String Name = parts[2].split(",", 2)[0]; 
+                 if (Type.equalsIgnoreCase(type) && Id.equals(itemToDelete.getId()) && Name.equals(itemToDelete.getName())) {
+                    continue;
+                 }
+            } 
+            lines.add(line);
+        }
+    }//Write all remaining lines back to the file (overwrite).
+    try (PrintWriter pw = new PrintWriter(new FileWriter(file, false))) {
+        for (String line : lines) {
+            pw.println(line);
+        }
+    }
+    }
+    private void deleteStock(food itemToDelete) throws FileNotFoundException, IOException{
+        String type = itemToDelete.gettype();
+        String fileName;
+        if (type.equalsIgnoreCase("Drinks")) {
+        fileName = "src\\menu\\RestaurantQueue\\DrinksStock.txt";
+        } else if (type.equalsIgnoreCase("Dessert")) {
+        fileName = "src\\menu\\RestaurantQueue\\DessertStock.txt";
+        } else if (type.equalsIgnoreCase("Maincourse")) {
+        fileName = "src\\menu\\RestaurantQueue\\MaincourseStock.txt";
         } else {
         return; 
         }
