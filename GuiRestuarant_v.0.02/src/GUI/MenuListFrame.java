@@ -1056,7 +1056,7 @@ public class MenuListFrame extends javax.swing.JFrame {
         }
         File file = new File(fileName);
         List<String> lines = new ArrayList<>();
-        String dataToDelete = String.format("%s,%s", itemToDelete.getId(), itemToDelete.getName());
+        String dataToDelete = String.format("%s", itemToDelete.getId());
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
         String line;
@@ -1094,7 +1094,7 @@ public class MenuListFrame extends javax.swing.JFrame {
         }
         File file = new File(fileName);
         List<String> lines = new ArrayList<>();
-        String dataToDelete = String.format("%s,%s", itemToDelete.getId(), itemToDelete.getName());
+        String dataToDelete = String.format("%s", itemToDelete.getId());
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
         String line;
